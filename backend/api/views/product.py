@@ -8,7 +8,8 @@ from rest_framework import status
 class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    lookup_field = "uuid"
+    http_method_names = ["get", "post", "put"]
+    lookup_field = "id"
 
     def create(self, request, *args, **kwargs):
         print(f"Recibiendo nuevo producto: {request.data.get('product')}")
