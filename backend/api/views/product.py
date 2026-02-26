@@ -1,4 +1,5 @@
 from rest_framework.viewsets import ModelViewSet
+from api.filters.product import ProductFilter
 from api.models.product import Product
 from api.serializers.product import ProductSerializer, ProductDetailSerializer
 from rest_framework.response import Response
@@ -9,7 +10,8 @@ class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     http_method_names = ["get", "post", "put"]
-    lookup_field = "id"
+    filterset_class = ProductFilter
+    lookup_field = "uuid"
 
     def create(self, request, *args, **kwargs):
         print(f"Recibiendo nuevo producto: {request.data.get('product')}")
@@ -22,7 +24,7 @@ class ProductViewSet(ModelViewSet):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
+        queryset = self.filter_queryset(self.get_queryset())
         serializer = ProductDetailSerializer(queryset, many=True)
         return Response(serializer.data)
 
