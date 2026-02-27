@@ -4,7 +4,7 @@ from api.models.product import Product
 
 class ProductFilter(filters.FilterSet):
     # Filter by product name
-    product = filters.CharFilter(field_name="product", lookup_expr="icontains")
+    name = filters.CharFilter(field_name="name", lookup_expr="icontains")
 
     # Filter by price range
     min_price = filters.NumberFilter(field_name="price", lookup_expr="gte")

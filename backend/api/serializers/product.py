@@ -10,7 +10,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ["product", "price", "zone", "category"]
+        fields = ["name", "price", "zone", "category"]
 
 
 class ProductDetailSerializer(serializers.ModelSerializer):
@@ -21,3 +21,15 @@ class ProductDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = "__all__"
+
+
+class ProductOrderSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Product
+        fields = ["uuid", "name", "price", "delivered"]
+
+    def to_representation(self, instance: Product):
+        representation = super().to_representation(instance)
+        representation["category"] = instance.category.name if instance.category else ""
+        return representation

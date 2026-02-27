@@ -9,7 +9,7 @@ class Product(models.Model):
     uuid = models.UUIDField(default=uuid4, editable=False, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
-    product = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     delivered = models.BooleanField(default=False)
     zone = models.CharField(max_length=100)
@@ -20,3 +20,6 @@ class Product(models.Model):
         blank=True,
         null=True,
     )
+
+    def __str__(self):
+        return self.name
