@@ -3,6 +3,7 @@ from rest_framework.routers import DefaultRouter
 
 from api.views.category import CategoryViewSet
 from api.views.hello_world import HelloWorldView
+from api.views.order import OrderViewSet
 from api.views.product import ProductViewSet
 
 # create a router
@@ -12,6 +13,7 @@ router = DefaultRouter()
 router.register(r"hello", HelloWorldView, basename="hello")
 router.register(r"products", ProductViewSet, basename="products")
 router.register(r"categories", CategoryViewSet, basename="categories")
+router.register(r"orders", OrderViewSet, basename="orders")
 
 # Wire up our API using automatic URL routing
 urlpatterns = [
