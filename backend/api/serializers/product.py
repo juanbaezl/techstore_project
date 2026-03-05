@@ -10,7 +10,14 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ["name", "price", "zone", "category"]
+        fields = ["name", "price", "category"]
+
+    def validate(self, data):
+        if data["price"] < 100:
+            raise serializers.ValidationError(
+                {"price": "El precio debe ser mayor o igual que 100."}
+            )
+        return data
 
 
 class ProductDetailSerializer(serializers.ModelSerializer):

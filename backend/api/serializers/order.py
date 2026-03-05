@@ -40,15 +40,15 @@ class OrderSerializer(serializers.ModelSerializer):
     #     # link items to the order
     #     for item_data in items_data:
     #         OrderItem.objects.create(order=order, **item_data)
-    # 1 pedido que tiene 10 productos, 11 conexiones a la base de datos
 
-    # return order
+    #     # 1 pedido que tiene 10 productos, 11 conexiones a la base de datos
+    #     return order
 
     # create bulk
     @transaction.atomic
     def create(self, validated_data):
         # extract items info
-        items_data = validated_data.pop("items")
+        items_data = validated_data.pop("order_items")
         # create principal order without items
         order = Order.objects.create(**validated_data)
         # link items to the order

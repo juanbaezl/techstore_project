@@ -18,4 +18,4 @@ class ProductFilter(filters.FilterSet):
 
     class Meta:
         model = Product
-        fields = ["zone"]
+        fields = []
